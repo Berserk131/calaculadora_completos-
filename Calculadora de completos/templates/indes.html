@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Completos Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e91e63;
+            --primary-hover: #c2185b;
+            --bg: #f8fafc;
+            --text: #1e293b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            letter-spacing: -0.5px;
+            color: #0f172a;
+        }
+
+        .input-group {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 1.5rem 0;
+            cursor: pointer;
+        }
+
+        button {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .results {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px dashed #f1f5f9;
+        }
+
+        .results h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .item span {
+            font-weight: 700;
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>CALCULADORA DE COMPLETOS</h1>
+    
+    <form method="POST">
+        <div class="input-group">
+            <label>N° de Personas</label>
+            <input type="number" name="personas" placeholder="Ej: 5" required>
+        </div>
+
+        <div class="input-group">
+            <label>Completos por persona</label>
+            <input type="number" name="por_persona" placeholder="Ej: 2" required>
+        </div>
+
+        <div class="checkbox-group">
+            <input type="checkbox" name="paltas_mulitas" id="mulitas">
+            <label for="mulitas" style="margin-bottom: 0;">¿Paltas mulitas? 🥑</label>
+        </div>
+
+        <button type="submit">Calcular Compra</button>
+    </form>
+
+    {% if resultados %}
+    <div class="results">
+        <h3>Lista de compras:</h3>
+        <div class="item">Pan y Vienesas: <span>{{ resultados.vienesas }}</span></div>
+        <div class="item">Tomates ({{ resultados.tomates_un }} un): <span>{{ resultados.tomates_kg }} kg</span></div>
+        <div class="item">Paltas ({{ resultados.paltas_un }} un): <span>{{ resultados.paltas_kg }} kg</span></div>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
